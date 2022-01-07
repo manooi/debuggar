@@ -1,0 +1,25 @@
+<div id="content">
+    <div class="mb-3 mt-3">
+        <h1 style="color:rgb(0, 0, 0);">JSON Property Summary</h1>
+    </div>
+    <p-card header=" 1) Json input">
+        <p-messages [(value)]="msgs" *ngIf="isChecked"></p-messages>
+        <textarea class="w-full" [(ngModel)]="jsonInput" (change)="inputChanges(jsonInput)" [rows]="15" [cols]="30"
+            pInputTextarea [autoResize]="false"></textarea>
+        <button (click)="clear()" pButton type="button" label="Clear" class="p-button-danger mt-3"></button>
+        <button (click)="check()" pButton type="button" label="Check" class="p-button-success mt-3 ml-2"></button>
+        <p-divider></p-divider>
+        <div class="mt-6">
+            <h2>2) Select properties to sum</h2>
+            <!-- <p-multiSelect [options]="props" [(ngModel)]="selectedProps" optionLabel="name">
+      </p-multiSelect> -->
+            <p-dropdown [options]="props" [(ngModel)]="selectedProps" placeholder="Select" optionLabel="name"
+                [showClear]="true" [virtualScroll]="true"></p-dropdown>
+        </div>
+        <div class="mt-4">
+            <button (click)="calculate()" pButton type="button" label="Calculate" [disabled]="!isJsonValid "></button>
+        </div>
+        <p-divider></p-divider>
+        <h1 style="margin-top: 50px;">Result : {{result>=0 ? (result | number) : result}}</h1>
+    </p-card>
+</div>

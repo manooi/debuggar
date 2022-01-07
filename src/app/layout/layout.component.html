@@ -1,0 +1,17 @@
+<!-- <button (click)="debug()">Debug</button> -->
+<div class="grid">
+  <div class="col-12">
+    <app-navbar [routerLink]="['/']"></app-navbar>
+  </div>
+</div>
+
+<div class="grid" style="margin-top: 80px;">
+  <div class="col-2" style="background-color: blue;">
+    <app-sidebar></app-sidebar>
+  </div>
+  <div class="col-8">
+    <router-outlet></router-outlet>
+    <!-- <app-json-summary></app-json-summary> -->
+  </div>
+  <div class="col-2"></div>
+</div>
