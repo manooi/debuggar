@@ -2,7 +2,7 @@
   <nav class="navbarItems">
 
     <div class="child">
-      <h1 class="nav-logo">
+      <h1 class="nav-logo" routerLink="/">
         Debuggar <i class="pi pi-comment" style="font-size: 2rem;"></i>
       </h1>
     </div>
@@ -23,9 +23,13 @@
     </ul> -->
     <div class="child">
       <ul class="nav-menu">
-        <li><a href="/json-summary" class="nav-links">json summary</a></li>
-        <li><a href="/json-aggregate" class="nav-links">json aggregate</a></li>
-        <li><a href="/login" class="nav-links">login</a></li>
+        <li *ngIf="authService.isLoggedIn()"><a routerLink="/json-summary" class="nav-links">json summary</a></li>
+        <li *ngIf="authService.isLoggedIn()"><a routerLink="/json-aggregate" class="nav-links">json aggregate</a></li>
+        <!-- <li *ngIf="authService.isLoggedIn()"><a href="/json-summary" class="nav-links">json summary</a></li>
+        <li *ngIf="authService.isLoggedIn()"><a href="/json-aggregate" class="nav-links">json aggregate</a></li> -->
+        
+        <li *ngIf="!authService.isLoggedIn()"><a href="/login" class="nav-links">login</a></li>
+        <li *ngIf="authService.isLoggedIn()"><a class="nav-links" style="cursor: pointer" (click)="authService.logout()">logout</a></li>
         <!-- <li>2</li>
         <li>3</li>
         <li>4</li>

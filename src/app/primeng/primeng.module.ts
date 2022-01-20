@@ -10,6 +10,7 @@ import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
 import { PasswordModule } from 'primeng/password';
 import { InputTextModule } from 'primeng/inputtext';
+import {ImageModule} from 'primeng/image';
 
 @NgModule({
   declarations: [],
@@ -25,6 +26,7 @@ import { InputTextModule } from 'primeng/inputtext';
     MessagesModule,
     PasswordModule,
     InputTextModule,
+    ImageModule
   ],
 })
 export class PrimengModule {}
