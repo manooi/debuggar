@@ -1,42 +1,40 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import {catchError, map, mapTo, tap} from 'rxjs/operators';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { catchError, map, mapTo, tap } from 'rxjs/operators';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
-import jwtDecode, { JwtPayload } from "jwt-decode";
+import jwtDecode, { JwtPayload } from 'jwt-decode';
 import { Router } from '@angular/router';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-
-
-  redirectUrl!:string;
+  redirectUrl!: string;
   private readonly JWT_TOKEN = 'token';
-  
-  constructor(private http: HttpClient, private router: Router) { }
 
+  constructor(private http: HttpClient, private router: Router) {}
 
   login(username: string): Observable<boolean> {
-    return this.http.post("http://localhost:5000/login", { Username: username })
+    return this.http
+      .post('http://localhost:5000/login', { Username: username })
       .pipe(
         tap((token: any) => this.doLoginUser(token.token)),
         mapTo(true),
-        catchError(error => {
-          // alert(error.error);
+        catchError((error: HttpErrorResponse) => {
+          console.log('error.auth', error);
           Swal.fire({
             title: 'Incorrect UserName!',
             text: 'Please try again',
             icon: 'error',
-            confirmButtonText: 'ok'
-          })
-          return of(error);
-        }));
+            confirmButtonText: 'ok',
+          });
+          return of(false);
+        })
+      );
   }
 
-  
-  private doLoginUser(token:string) {
+  private doLoginUser(token: string) {
     const decoded = jwtDecode<JwtPayload>(token);
     this.storeToken(token);
   }
@@ -62,7 +60,6 @@ export class AuthService {
     this.router.navigate(['/']);
   }
 
-
   // login(username:string) {
   //   return this.http.post("http://localhost:5000/login", {Username: username}).subscribe({next: (data:any)=> {
   //     console.log("sub", data);
@@ -85,6 +82,4 @@ export class AuthService {
   // validateToken(token:string) {
   //   return this.http.post("http://localhost:5000/ValidateToken", {token:token});
   // }
-
-
 }

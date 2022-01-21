@@ -6,11 +6,16 @@
 
 <div class="grid" style="margin-top: 80px;">
   <div class="col-2">
-  <!-- <div class="col-2" style="background-color: blue;"> -->
-    <!-- <app-sidebar></app-sidebar> -->
+    <!-- <div class="col-2" style="background-color: blue;"> -->
+    <app-sidebar></app-sidebar>
   </div>
   <div class="col-8">
-    <router-outlet></router-outlet>
+    <router-outlet>
+      <!-- <ngx-spinner></ngx-spinner> -->
+      <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="pacman" [fullScreen]="false">
+        <p style="color: white"> Loading... </p>
+      </ngx-spinner>
+    </router-outlet>
   </div>
   <div class="col-2"></div>
 </div>

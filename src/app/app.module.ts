@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -14,7 +14,10 @@ import { JsonSummaryComponent } from './json-summary/json-summary.component';
 import { JsonAggregateComponent } from './json-aggregate/json-aggregate.component';
 import { ClipboardModule } from 'ngx-clipboard';
 import { RegisterComponent } from './register/register.component';
-import { HttpClientModule} from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { SendRequestComponent } from './send-request/send-request.component';
+import { ErrorInterceptor } from './intercepters/error.interceptor';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -26,6 +29,7 @@ import { HttpClientModule} from '@angular/common/http';
     RegisterComponent,
     JsonSummaryComponent,
     JsonAggregateComponent,
+    SendRequestComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,8 +39,12 @@ import { HttpClientModule} from '@angular/common/http';
     PrimengModule,
     ClipboardModule,
     HttpClientModule,
+    NgxSpinnerModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {}

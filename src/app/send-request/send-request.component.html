@@ -1,0 +1,21 @@
+<div class="container">
+  <h1>Authorize header test!</h1>
+  <div>
+    <label class="mr-3">Bearer Token</label>
+    <input type="text" pInputText [(ngModel)]="token" />
+    <button (click)="getToken()" pButton type="button" class="p-button-success ml-3" label="Get token"></button>
+    <button (click)="clearToken()" pButton type="button" class="p-button-danger ml-3" label="Clear"></button>
+  </div>
+  <div class="mt-5">
+    <button (click)="sendRequest()" pButton type="button" label="Send Request"></button>
+  </div>
+  <div>
+    <div *ngIf="isLoad">
+      <div class="loader"></div>
+    </div>
+
+    <h2>
+      {{response | json}}
+    </h2>
+  </div>
+</div>
