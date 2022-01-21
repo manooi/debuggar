@@ -5,7 +5,7 @@ import { JsonSummaryComponent } from './json-summary/json-summary.component';
 import { JsonAggregateComponent } from './json-aggregate/json-aggregate.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { AuthGuard } from 'src/app/shared/auth.guard';
+import { AuthGuard } from 'src/app/auth/auth.guard';
 import { PageNotFoundComponent } from './page-not-found.component';
 import { SendRequestComponent } from './send-request/send-request.component';
 

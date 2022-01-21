@@ -8,7 +8,7 @@ import {
 } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { AuthService } from 'src/app/shared/auth.service';
+import { AuthService } from 'src/app/auth/auth.service';
 import Swal from 'sweetalert2';
 import { NgxSpinnerService } from 'ngx-spinner';
 
@@ -35,6 +35,7 @@ export class ErrorInterceptor implements HttpInterceptor {
           console.log('B');
           if (err.status === 0) {
             this.alertNoInternet();
+            this.spinner.hide();
             return throwError('Unable to Connect to the Server');
           }
         }
@@ -56,8 +57,8 @@ export class ErrorInterceptor implements HttpInterceptor {
 
   alertNoInternet() {
     Swal.fire({
-      title: 'No connection',
-      text: 'Please check your internet connection',
+      title: 'No connection / Not  Found',
+      text: 'Please try again.',
       icon: 'error',
       confirmButtonText: 'Ok',
     });

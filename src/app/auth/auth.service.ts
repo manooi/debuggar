@@ -17,7 +17,7 @@ export class AuthService {
 
   login(username: string): Observable<any> {
     return this.http
-      .post('http://localhost:5000/logins', { Username: username })
+      .post('http://localhost:5000/login', { Username: username })
       .pipe(
         tap((token: any) => this.doLoginUser(token.token)),
         mapTo(true),

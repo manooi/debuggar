@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { delay } from 'rxjs/operators';
-import { AuthService } from '../shared/auth.service';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   // selector: 'app-layout',
