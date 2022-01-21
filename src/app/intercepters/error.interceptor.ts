@@ -4,6 +4,7 @@ import {
   HttpHandler,
   HttpEvent,
   HttpInterceptor,
+  HttpErrorResponse,
 } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -23,25 +24,41 @@ export class ErrorInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
-      catchError((err) => {
+      catchError((err: HttpErrorResponse) => {
         if (err.status === 401 && err.url !== 'http://localhost:5000/login') {
           // auto logout if 401 response returned from api
+          console.log('A');
           this.spinner.hide();
           this.authService.logout();
-          this.alert();
+          this.alert401();
+        } else if (err instanceof HttpErrorResponse) {
+          console.log('B');
+          if (err.status === 0) {
+            this.alertNoInternet();
+            return throwError('Unable to Connect to the Server');
+          }
         }
-        const error = err.error?.message || err.statusText;
-        return throwError(error);
+
+        return throwError(err);
       })
     );
   }
 
-  alert() {
+  alert401() {
     Swal.fire({
       title: 'Unauthorized 401',
       text: "You've been kicked out",
       icon: 'error',
       imageUrl: '/assets/cat-cute.gif',
+      confirmButtonText: 'Ok',
+    });
+  }
+
+  alertNoInternet() {
+    Swal.fire({
+      title: 'No connection',
+      text: 'Please check your internet connection',
+      icon: 'error',
       confirmButtonText: 'Ok',
     });
   }

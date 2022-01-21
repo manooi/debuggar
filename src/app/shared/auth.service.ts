@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpEvent } from '@angular/common/http';
 import { catchError, map, mapTo, tap } from 'rxjs/operators';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import jwtDecode, { JwtPayload } from 'jwt-decode';
@@ -15,21 +15,23 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  login(username: string): Observable<boolean> {
+  login(username: string): Observable<any> {
     return this.http
-      .post('http://localhost:5000/login', { Username: username })
+      .post('http://localhost:5000/logins', { Username: username })
       .pipe(
         tap((token: any) => this.doLoginUser(token.token)),
         mapTo(true),
         catchError((error: HttpErrorResponse) => {
           console.log('error.auth', error);
-          Swal.fire({
-            title: 'Incorrect UserName!',
-            text: 'Please try again',
-            icon: 'error',
-            confirmButtonText: 'ok',
-          });
-          return of(false);
+          if (error?.status === 401) {
+            Swal.fire({
+              title: 'Incorrect UserName!',
+              text: 'Please try again',
+              icon: 'error',
+              confirmButtonText: 'ok',
+            });
+          }
+          return throwError(error);
         })
       );
   }

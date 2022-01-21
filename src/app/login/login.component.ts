@@ -24,8 +24,10 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.username).subscribe(
       (success) => {
         if (success) {
+          console.log('success', success);
           this.router.navigate(['/json-summary']);
         }
+        console.log('not success');
       },
       (error) => {
         console.log('error is', error);
