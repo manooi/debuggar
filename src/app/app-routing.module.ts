@@ -8,6 +8,7 @@ import { RegisterComponent } from './register/register.component';
 import { AuthGuard } from 'src/app/auth/auth.guard';
 import { PageNotFoundComponent } from './page-not-found.component';
 import { SendRequestComponent } from './send-request/send-request.component';
+import { WhaleAlertComponent } from './whale-alert/whale-alert.component';
 
 const routes: Routes = [
   { path: 'welcome', component: WelcomeComponent },
@@ -28,6 +29,7 @@ const routes: Routes = [
   },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'whale-alert', component: WhaleAlertComponent },
   { path: '', redirectTo: 'welcome', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
 ];

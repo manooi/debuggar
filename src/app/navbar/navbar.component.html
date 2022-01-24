@@ -26,6 +26,7 @@
         <li *ngIf="authService.isLoggedIn()"><a routerLink="/json-summary" class="nav-links">json summary</a></li>
         <li *ngIf="authService.isLoggedIn()"><a routerLink="/json-aggregate" class="nav-links">json aggregate</a></li>
         <li *ngIf="authService.isLoggedIn()"><a routerLink="/send-request" class="nav-links">send request</a></li>
+        <li><a routerLink="/whale-alert" class="nav-links">whale-alert</a></li>
 
         <li *ngIf="!authService.isLoggedIn()"><a href="/login" class="nav-links">login</a></li>
         <li *ngIf="authService.isLoggedIn()"><a class="nav-links" style="cursor: pointer"

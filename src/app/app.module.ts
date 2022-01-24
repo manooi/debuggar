@@ -18,6 +18,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SendRequestComponent } from './send-request/send-request.component';
 import { ErrorInterceptor } from './intercepters/error.interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { WhaleAlertComponent } from './whale-alert/whale-alert.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     JsonSummaryComponent,
     JsonAggregateComponent,
     SendRequestComponent,
+    WhaleAlertComponent,
   ],
   imports: [
     BrowserModule,
