@@ -1,0 +1,33 @@
+#side-bar {
+  background-color: white;
+  // background-color: rgb(211, 29, 29);
+  border-right: 0.5px solid rgb(207, 204, 204);
+  // width: 100%;
+  // width: max-content;
+  height: 100vh;
+  // position: absolute;
+  top: 80px;
+  position: fixed;
+  width: 16.6667%;
+}
+
+::ng-deep .p-menu {
+  width: 90%;
+  margin: 0 auto;
+  .p-menuitem-link {
+    // justify-content: center;
+  }
+}
+
+.parent {
+  display: flex;
+  // border-right: 2px solid rgb(73, 82, 202);
+  height: 100%;
+  width: 100% !important;
+  align-items: center;
+}
+
+.child {
+  width: 100%;
+  // background-color: hotpink;
+}
